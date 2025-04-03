@@ -111,53 +111,53 @@ foreach ($months as $eng => $rus) {
             font-size: 100%;
             font: inherit;
             vertical-align: baseline;
-            box-sizing: border-box;
-            font-family: system-ui;
         }
 
-        /* Сброс дефолтных стилей для списков */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1;
+            margin: 10px 30px;
+            text-align: center;
+        }
+
         ol, ul {
             list-style: none;
         }
 
-        /* Убираем стандартные отступы у таблиц */
         table {
             border-collapse: collapse;
             border-spacing: 0;
+            margin-left: auto;
+            margin-right: auto;
+            border: 0.5px solid #000; /* Тонкая обводка для таблицы */
         }
 
-        /* Убираем подчеркивание у ссылок */
+        th, td {
+            border: 0.5px solid #000; /* Тонкая обводка для ячеек */
+        }
+
         a {
             text-decoration: none;
             color: inherit;
         }
 
-        /* Сбрасываем стили заголовков */
         h1, h2, h3, h4, h5, h6 {
             font-size: inherit;
             font-weight: normal;
         }
 
-        /* Убираем выделение у форм */
-        input, button, textarea, select {
-            outline: none;
-        }
-
-        /* Устанавливаем базовые настройки для body */
-        body {
-            line-height: 1;
-            margin: 10px 30px;
-        }
-
         .text_attention {
-            font-size: 8pt;
-            place-items: center;
-            margin: 30px 0;
+            font-size: 6pt;
+            text-align: center;
+            margin: 10px auto;
+            display: block;
         }
 
         .block_text {
             text-align: center;
             width: 260px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .table_with_bank .text {
@@ -174,60 +174,70 @@ foreach ($months as $eng => $rus) {
 
         #bank td {
             padding: 5px 10px;
-            border: solid 1px;
+            border: 0.5px solid #000; /* Тонкая обводка */
         }
 
         #text_buyer {
-            margin: 0 75px;
+            margin: 0 auto;
+            width: 80%;
+            border: none; /* Убираем обводку у этой таблицы */
         }
 
         #text_buyer td {
             padding: 10px 15px;
+            border: none; /* Убираем границы у ячеек */
         }
 
         #product td {
             padding: 5px 10px;
-            border: solid 1px;
+            border: 0.5px solid #000; /* Тонкая обводка */
         }
 
         #product {
-            margin: 0 90px;
+            margin: 0 auto;
             width: 80%;
         }
 
         #table_sum {
-            float: right;
-            margin: 0 50px;
+            margin-left: auto;
+            margin-right: 50px;
+            border: none; /* Убираем обводку */
         }
 
         #table_sum td {
             padding: 5px 10px;
             text-align: right;
+            border: none; /* Убираем границы */
         }
 
         .full-width-line {
             width: 80%;
-            height: 2px;
+            height: 1px; /* Более тонкая линия */
             background-color: #000;
-            margin: 10px 0;
-            justify-self: center;
+            margin: 10px auto;
         }
 
         .count_name {
-            margin: 100px 0 0 90px;
+            margin: 40px 0 0 90px;
             font-size: 7pt;
+            text-align: left;
         }
+
         .warning {
             margin: 10px 0 0 90px;
             font-size: 6pt;
+            text-align: left;
         }
 
         #table_sign td {
             padding: 5px 30px;
+            border: none; /* Убираем границы */
         }
 
         #table_sign {
             margin: 20px 0 0 80px;
+            text-align: left;
+            border: none; /* Убираем обводку */
         }
     </style>
 </head>
@@ -271,7 +281,6 @@ foreach ($months as $eng => $rus) {
         </table>
     </div>
 
-    <hr>
     <br>
     <div class="block_with_product">
         <span style="margin: 0 10%;">Счет на оплату № <?= $orderNumber ?> от <?= $orderDate ?> г.</span>
