@@ -47,6 +47,7 @@ class InvoiceHandler extends PaySystem\BaseServiceHandler
         $params['BANK_INFO'] = $this->getBankInfo();
         $params['COMPANY_INFO'] = $this->getCompanyInfo();
 
+
         $pdfContent = $this->generatePdf($params);
 
         if ($pdfContent) {
@@ -112,6 +113,7 @@ class InvoiceHandler extends PaySystem\BaseServiceHandler
         // END PROPS
 
         //$filePath = $_SERVER['DOCUMENT_ROOT'].'/basket_log.txt';
+
         if ($basket) {
             $i = 1;
             foreach ($basket as $basketItem) {
@@ -170,11 +172,17 @@ class InvoiceHandler extends PaySystem\BaseServiceHandler
         $propertyCollection = $order->getPropertyCollection();
 
         $result['COMPANY_NAME'] = '';
+        $result['FIO'] = '';
         $result['INN'] = '';
         $result['ADDRESS'] = '';
         $result['PHONE'] = '';
 
-        $companyNameProp = $propertyCollection->getItemByOrderPropertyCode('COMPANY_NAME');
+        $namePersonBuyer = $propertyCollection->getItemByOrderPropertyCode('FIO');
+        if($namePersonBuyer) {
+            $result['FIO'] = $namePersonBuyer->getValue();
+        }
+
+        $companyNameProp = $propertyCollection->getItemByOrderPropertyCode('COMPANY');
         if ($companyNameProp) {
             $result['COMPANY_NAME'] = $companyNameProp->getValue();
         }
@@ -185,7 +193,7 @@ class InvoiceHandler extends PaySystem\BaseServiceHandler
         }
 
         $address = [];
-        $addrProps = ['ZIP', 'CITY', 'ADDRESS', 'STREET', 'HOUSE', 'FLAT'];
+        $addrProps = ['ZIP', 'CITY', 'ADDRESS', 'STREET', 'HOUSE', 'FLAT', 'COMPANY_ADR'];
 
         foreach ($addrProps as $code) {
             $prop = $propertyCollection->getItemByOrderPropertyCode($code);

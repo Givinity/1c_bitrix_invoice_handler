@@ -294,7 +294,7 @@ foreach ($months as $eng => $rus) {
             </tr>
             <tr>
                 <td>Покупатель:</td>
-                <td><?= $params['BUYER_INFO']['COMPANY_NAME'] ? $params['BUYER_INFO']['COMPANY_NAME'] : 'Физическое лицо' ?><?= $params['BUYER_INFO']['INN'] ? ', БИН / ИИН ' . $params['BUYER_INFO']['INN'] : '' ?>, <?= $params['BUYER_INFO']['ADDRESS'] ?><?= $params['BUYER_INFO']['PHONE'] ? ', тел.: ' . $params['BUYER_INFO']['PHONE'] : '' ?></td>
+                <td><?= $params['BUYER_INFO']['COMPANY_NAME'] ? $params['BUYER_INFO']['COMPANY_NAME'] : 'Физическое лицо: ' . $params['BUYER_INFO']['FIO'] ?><?= $params['BUYER_INFO']['INN'] ? ', БИН / ИИН ' . $params['BUYER_INFO']['INN'] : '' ?>, <?= $params['BUYER_INFO']['ADDRESS'] ?><?= $params['BUYER_INFO']['PHONE'] ? ', тел.: ' . $params['BUYER_INFO']['PHONE'] : '' ?></td>
             </tr>
             <tr>
                 <td>Договор:</td>
