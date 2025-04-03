@@ -48,19 +48,25 @@ class InvoiceHandler extends PaySystem\BaseServiceHandler
         if ($pdfContent) {
             $fileName = $this->saveInvoiceFile($payment, $pdfContent);
             if ($fileName) {
-                $filePath = $_SERVER['DOCUMENT_ROOT'] . self::UPLOAD_DIR . $fileName;
+                $downloadUrl = $this->getDownloadUrl($fileName);
 
-                // Устанавливаем данные результата
+                $html = '
+                    <div class="invoice-download-link">
+                        <a href="' . htmlspecialcharsbx($downloadUrl) . '" class="btn" target="_blank">
+                            Скачать счет (№' . $payment->getId() . ')
+                        </a>
+                    </div>
+                ';
+
+                // setTemplate() для буфера $arPaySystem['BUFFERED_OUTPUT']
+                $result->setTemplate($html);
+
                 $result->setData([
                     'PDF_CONTENT' => $pdfContent,
                     'INVOICE_NUMBER' => $params['PAYMENT_ID'],
                     'INVOICE_DATE' => $params['DATE_BILL']->format('d.m.Y'),
-                    'DOWNLOAD_URL' => self::UPLOAD_DIR . $fileName,
+                    'DOWNLOAD_URL' => $downloadUrl,
                 ]);
-
-                // Инициируем скачивание
-                $this->sendFileToDownload($filePath, $fileName);
-                exit; // Завершаем выполнение после отправки файла
             } else {
                 $result->addError(new PaySystem\Error('Error saving invoice file'));
             }
@@ -87,24 +93,9 @@ class InvoiceHandler extends PaySystem\BaseServiceHandler
         return false;
     }
 
-    private function sendFileToDownload($filePath, $fileName)
+    private function getDownloadUrl($fileName)
     {
-        if (file_exists($filePath)) {
-            // Очищаем буфер вывода
-            if (ob_get_level()) {
-                ob_end_clean();
-            }
-
-            // Устанавливаем заголовки для скачивания
-            header('Content-Type: application/pdf');
-            header('Content-Disposition: attachment; filename="' . $fileName . '"');
-            header('Content-Length: ' . filesize($filePath));
-            header('Cache-Control: private, max-age=0, must-revalidate');
-            header('Pragma: public');
-
-            // Читаем и выводим файл
-            readfile($filePath);
-        }
+        return self::UPLOAD_DIR . $fileName;
     }
 
     private function getBasketItems(Sale\Order $order)
