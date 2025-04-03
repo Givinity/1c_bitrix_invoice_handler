@@ -2,6 +2,8 @@
 
 namespace Sale\Handlers\PaySystem;
 
+use Bitrix\Iblock\ElementPropertyTable;
+use Bitrix\Iblock\PropertyTable;
 use Bitrix\Main\Loader;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\Request;
@@ -12,6 +14,7 @@ use Bitrix\Sale\Payment;
 use Bitrix\Sale\PaySystem;
 use Bitrix\Currency;
 use Bitrix\Main\Config\Option;
+
 
 Loc::loadMessages(__FILE__);
 
@@ -104,17 +107,43 @@ class InvoiceHandler extends PaySystem\BaseServiceHandler
         $result = [];
         $basket = $order->getBasket();
 
+        // PROPS свойства товара которые нужно вывести в шаблоне
+        $propertyCode = $this->getBusinessValue(payment:null, code:'PROP_ARTICLE') ?:'CML2_ARTICLE';
+        // END PROPS
+
+        $filePath = $_SERVER['DOCUMENT_ROOT'].'/basket_log.txt';
         if ($basket) {
             $i = 1;
             foreach ($basket as $basketItem) {
+                $productId = $basketItem->getProductId();
+                $property = PropertyTable::getRow([
+                    'filter' => ['CODE' => $propertyCode],
+                    'select' => ['ID']
+                ]);
+
+                if ($property) {
+                    $propertyValue = ElementPropertyTable::getRow([
+                        'filter' => [
+                            'IBLOCK_ELEMENT_ID' => $productId,
+                            'IBLOCK_PROPERTY_ID' => $property['ID']
+                        ],
+                        'select' => ['VALUE']
+                    ]);
+
+                    $article = $propertyValue['VALUE'] ?? '-';
+                }
+
                 $result[] = [
                     'NUMBER' => $i++,
-                    'ARTICLE' => $basketItem->getField('PROPERTY_ARTICLE_VALUE') ?: '-',
+                    'ARTICLE' => $article,
                     'NAME' => $basketItem->getField('NAME'),
                     'QUANTITY' => $basketItem->getQuantity(),
                     'PRICE' => $basketItem->getPrice(),
                     'SUM' => $basketItem->getFinalPrice(),
                 ];
+
+                $logEntry = date('Y-m-d H:i:s') . " - " . print_r($properties, true) . "\n";
+                file_put_contents($filePath, $logEntry, FILE_APPEND);
             }
         }
 

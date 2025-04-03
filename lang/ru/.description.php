@@ -25,6 +25,8 @@ $MESS['SALE_HPS_INVOICE_HANDLER_COMPANY_MANAGER_DESC'] = 'ФИО менедже�
 
 $MESS['SALE_HPS_INVOICE_HANDLER_VALIDITY_DAYS'] = 'Срок действия счета (дней)';
 $MESS['SALE_HPS_INVOICE_HANDLER_VALIDITY_DAYS_DESC'] = 'Количество дней, в течение которых счет действителен';
+$MESS['SALE_HPS_INVOICE_HANDLER_PROP_ARTICLE'] = 'Код свойства Артикул';
+$MESS['SALE_HPS_INVOICE_HANDLER_PROP_ARTICLE_DESC'] = 'Поиск свойства по заданном коду';
 $MESS['SALE_HPS_INVOICE_HANDLER_LOGO_FILE'] = 'Логотип компании';
 $MESS['SALE_HPS_INVOICE_HANDLER_LOGO_FILE_DESC'] = 'Изображение логотипа компании для отображения в счете';
 $MESS['SALE_HPS_INVOICE_HANDLER_SHOW_LOGO'] = 'Показывать логотип';

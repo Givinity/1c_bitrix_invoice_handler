@@ -131,6 +131,18 @@ $data = array(
                 'PROVIDER_KEY' => 'VALUE'
             )
         ),
+
+        'PROP_ARTICLE' => array(
+            'NAME' => Loc::getMessage('SALE_HPS_INVOICE_HANDLER_PROP_ARTICLE'),
+            'DESCRIPTION' => Loc::getMessage('SALE_HPS_INVOICE_HANDLER_PROP_ARTICLE_DESC'),
+            'SORT' => 300,
+            'GROUP' => 'GENERAL_SETTINGS',
+            'DEFAULT' => array(
+                'PROVIDER_VALUE' => 'CML2_ARTICLE',
+                'PROVIDER_KEY' => 'VALUE'
+            )
+        ),
+
         'LOGO_FILE' => array(
             'NAME' => Loc::getMessage('SALE_HPS_INVOICE_HANDLER_LOGO_FILE'),
             'DESCRIPTION' => Loc::getMessage('SALE_HPS_INVOICE_HANDLER_LOGO_FILE_DESC'),
