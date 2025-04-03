@@ -149,7 +149,7 @@ foreach ($months as $eng => $rus) {
         .text_attention {
             font-size: 6pt;
             text-align: center;
-            margin: 10px auto;
+            margin: 10px auto 0 auto;
             display: block;
         }
 
@@ -158,6 +158,7 @@ foreach ($months as $eng => $rus) {
             width: 260px;
             margin-left: auto;
             margin-right: auto;
+            padding-top: 5px;
         }
 
         .table_with_bank .text {

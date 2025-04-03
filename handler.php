@@ -111,7 +111,7 @@ class InvoiceHandler extends PaySystem\BaseServiceHandler
         $propertyCode = $this->getBusinessValue(payment:null, code:'PROP_ARTICLE') ?:'CML2_ARTICLE';
         // END PROPS
 
-        $filePath = $_SERVER['DOCUMENT_ROOT'].'/basket_log.txt';
+        //$filePath = $_SERVER['DOCUMENT_ROOT'].'/basket_log.txt';
         if ($basket) {
             $i = 1;
             foreach ($basket as $basketItem) {
@@ -142,8 +142,8 @@ class InvoiceHandler extends PaySystem\BaseServiceHandler
                     'SUM' => $basketItem->getFinalPrice(),
                 ];
 
-                $logEntry = date('Y-m-d H:i:s') . " - " . print_r($properties, true) . "\n";
-                file_put_contents($filePath, $logEntry, FILE_APPEND);
+                //$logEntry = date('Y-m-d H:i:s') . " - " . print_r($properties, true) . "\n";
+                //file_put_contents($filePath, $logEntry, FILE_APPEND);
             }
         }
 
