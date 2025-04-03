@@ -32,7 +32,8 @@ class InvoiceHandler extends PaySystem\BaseServiceHandler
         $params['DATE_BILL'] = new Date();
 
         $dateUntil = new Date();
-        $dateUntil->add('30D');
+        $dateAdd = $this->getBusinessValue($order, 'VALIDITY_DAYS') ?: '30';
+        $dateUntil->add($dateAdd . 'D');
         $params['DATE_BILL_UNTIL'] = $dateUntil;
 
         $order = $payment->getOrder();
@@ -177,23 +178,23 @@ class InvoiceHandler extends PaySystem\BaseServiceHandler
     private function getBankInfo()
     {
         return [
-            'BANK_NAME' => $this->getBusinessValue($order, 'INVOICE_HANDLER_BANK_NAME') ?: 'АО "Банк ЦентрКредит"',
-            'BIK' => $this->getBusinessValue($order, 'INVOICE_HANDLER_BIK') ?: 'KCJBKZKX',
-            'ACCOUNT_NUMBER' => $this->getBusinessValue($order, 'INVOICE_HANDLER_ACCOUNT_NUMBER') ?: 'KZ428560000000425746',
-            'KBE' => $this->getBusinessValue($order, 'INVOICE_HANDLER_KBE') ?: '17',
-            'CODE' => $this->getBusinessValue($order, 'INVOICE_HANDLER_CODE') ?: '710',
-            'PAYMENT_PURPOSE_CODE' => $this->getBusinessValue($order, 'INVOICE_HANDLER_PAYMENT_PURPOSE_CODE') ?: 'ЗК25030AУТ0021240001',
+            'BANK_NAME' => $this->getBusinessValue($order, 'BANK_NAME') ?: 'АО "Банк ЦентрКредит"',
+            'BIK' => $this->getBusinessValue($order, 'BANK_BIK') ?: 'KCJBKZKX',
+            'ACCOUNT_NUMBER' => $this->getBusinessValue($order, 'BANK_ACCOUNT') ?: 'KZ428560000000425746',
+            'KBE' => $this->getBusinessValue($order, 'BANK_KBE') ?: '17',
+            'CODE' => $this->getBusinessValue($order, 'BANK_CODE') ?: '710',
+            'PAYMENT_PURPOSE_CODE' => $this->getBusinessValue($order, 'PAYMENT_PURPOSE') ?: 'ЗК25030AУТ0021240001',
         ];
     }
 
     private function getCompanyInfo()
     {
         return [
-            'NAME' => $this->getBusinessValue($order, 'INVOICE_HANDLER_COMPANY_NAME') ?: 'ТОО Asian Medical Depo Group',
-            'INN' => $this->getBusinessValue($order, 'INVOICE_HANDLER_COMPANY_INN') ?: '070940017485',
-            'ADDRESS' => $this->getBusinessValue($order, 'INVOICE_HANDLER_COMPANY_ADDRESS') ?: 'Республика Казахстан, г.Алматы, ул.Богенбай батыра, дом № 149',
-            'PHONE' => $this->getBusinessValue($order, 'INVOICE_HANDLER_COMPANY_PHONE') ?: '+7 (727) 313-15-23, доб. 110',
-            'MANAGER' => $this->getBusinessValue($order, 'INVOICE_HANDLER_COMPANY_MANAGER') ?: '',
+            'NAME' => $this->getBusinessValue($order, 'COMPANY_NAME') ?: 'ТОО Asian Medical Depo Group',
+            'INN' => $this->getBusinessValue($order, 'COMPANY_INN') ?: '070940017485',
+            'ADDRESS' => $this->getBusinessValue($order, 'COMPANY_ADDRESS') ?: 'Республика Казахстан, г.Алматы, ул.Богенбай батыра, дом № 149',
+            'PHONE' => $this->getBusinessValue($order, 'COMPANY_PHONE') ?: '+7 (727) 313-15-23, доб. 110',
+            'MANAGER' => $this->getBusinessValue($order, 'COMPANY_MANAGER') ?: '',
         ];
     }
 
