@@ -116,7 +116,7 @@ foreach ($months as $eng => $rus) {
         body {
             font-family: Arial, sans-serif;
             line-height: 1;
-            margin: 10px 30px;
+            margin: 0px 0px;
             text-align: center;
         }
 
@@ -130,6 +130,7 @@ foreach ($months as $eng => $rus) {
             margin-left: auto;
             margin-right: auto;
             border: 0.5px solid #000; /* Тонкая обводка для таблицы */
+            width: 80%;
         }
 
         th, td {
@@ -147,7 +148,7 @@ foreach ($months as $eng => $rus) {
         }
 
         .text_attention {
-            font-size: 6pt;
+            font-size: 7pt;
             text-align: center;
             margin: 10px auto 0 auto;
             display: block;
@@ -159,6 +160,10 @@ foreach ($months as $eng => $rus) {
             margin-left: auto;
             margin-right: auto;
             padding-top: 5px;
+        }
+
+        .block_text p {
+            margin:0;
         }
 
         .table_with_bank .text {
@@ -174,7 +179,7 @@ foreach ($months as $eng => $rus) {
         }
 
         #bank td {
-            padding: 5px 10px;
+            padding: 1px 5px;
             border: 0.5px solid #000; /* Тонкая обводка */
         }
 
@@ -190,7 +195,7 @@ foreach ($months as $eng => $rus) {
         }
 
         #product td {
-            padding: 5px 10px;
+            padding: 3px 5px;
             border: 0.5px solid #000; /* Тонкая обводка */
         }
 
@@ -226,7 +231,7 @@ foreach ($months as $eng => $rus) {
 
         .warning {
             margin: 10px 0 0 90px;
-            font-size: 6pt;
+            font-size: 8pt;
             text-align: left;
         }
 
